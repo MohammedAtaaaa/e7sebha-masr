@@ -3,6 +3,7 @@ import Link from "next/link";
 import { banks } from "@/data/banks";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "مقارنة البنوك المصرية 2026 - قروض وشهادات وحسابات",
@@ -13,31 +14,26 @@ export const metadata: Metadata = {
 
 export default function BanksIndexPage() {
   return (
-    <>
+    <div className="container mx-auto px-4 lg:px-8 py-8">
       <Breadcrumbs items={[{ label: "البنوك" }]} />
-      <h1 className="text-3xl md:text-4xl font-bold mb-4">مقارنة البنوك المصرية 2026</h1>
-      <p className="text-gray-600 mb-8 max-w-2xl">
+      <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] mb-3">مقارنة البنوك المصرية 2026</h1>
+      <p className="text-[var(--text-secondary)] mb-10 max-w-2xl leading-relaxed">
         قارن بين القروض والشهادات وحسابات التوفير في أكبر البنوك المصرية.
       </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {banks.map((bank) => (
           <Link key={bank.slug} href={`/banks/${bank.slug}`}>
-            <Card className="h-full hover:border-emerald-300 hover:shadow-md transition-all">
+            <Card className="h-full hover:border-brand-500/30 group">
               <CardHeader>
-                <CardTitle className="text-lg">{bank.name}</CardTitle>
-                <p className="text-sm text-gray-500">{bank.nameEn}</p>
+                <CardTitle className="text-lg group-hover:text-brand-500 transition-colors">{bank.name}</CardTitle>
+                <p className="text-sm text-[var(--text-muted)]">{bank.nameEn}</p>
               </CardHeader>
               <CardContent className="space-y-3">
-                <p className="text-sm text-gray-600 line-clamp-2">{bank.description}</p>
+                <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">{bank.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {bank.features.slice(0, 3).map((feature) => (
-                    <span
-                      key={feature}
-                      className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700"
-                    >
-                      {feature}
-                    </span>
+                    <Badge key={feature}>{feature}</Badge>
                   ))}
                 </div>
               </CardContent>
@@ -45,6 +41,6 @@ export default function BanksIndexPage() {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }

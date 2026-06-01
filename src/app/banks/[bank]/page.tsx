@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { FAQSection, FAQJsonLd } from "@/components/seo/faq-section";
 import { RelatedLinks } from "@/components/seo/related-links";
 import { ShareButtons } from "@/components/seo/share-buttons";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface PageProps {
@@ -38,7 +39,7 @@ export default async function BankPage({ params }: PageProps) {
     .filter(Boolean);
 
   return (
-    <>
+    <div className="container mx-auto px-4 lg:px-8 py-8">
       <Breadcrumbs
         items={[
           { label: "البنوك", href: "/banks" },
@@ -47,44 +48,44 @@ export default async function BankPage({ params }: PageProps) {
       />
       <FAQJsonLd faqs={bankData.faqs} />
 
-      <h1 className="text-3xl md:text-4xl font-bold mb-2">{bankData.name}</h1>
-      <p className="text-sm text-gray-500 mb-2">{bankData.nameEn}</p>
-      <p className="text-gray-600 mb-8">{bankData.description}</p>
+      <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] mb-2">{bankData.name}</h1>
+      <p className="text-sm text-[var(--text-muted)] mb-2">{bankData.nameEn}</p>
+      <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">{bankData.description}</p>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">أنواع القروض</h2>
+      <section className="mb-10">
+        <h2 className="text-2xl font-extrabold text-[var(--text-primary)] mb-6">أنواع القروض</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {bankData.loanTypes.map((loan) => (
             <Card key={loan.name}>
               <CardHeader>
                 <CardTitle className="text-base">{loan.name}</CardTitle>
-                <p className="text-lg font-bold text-emerald-600">{loan.rate}</p>
+                <p className="text-lg font-extrabold text-brand-500">{loan.rate}</p>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600">{loan.description}</p>
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{loan.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">شهادات الادخار</h2>
-        <div className="overflow-x-auto">
+      <section className="mb-10">
+        <h2 className="text-2xl font-extrabold text-[var(--text-primary)] mb-6">شهادات الادخار</h2>
+        <div className="overflow-x-auto rounded-2xl border border-[var(--border-color)]">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="border-b border-gray-200">
-                <th className="py-3 px-4 text-right text-sm font-semibold text-gray-700">الشهادة</th>
-                <th className="py-3 px-4 text-right text-sm font-semibold text-gray-700">العائد</th>
-                <th className="py-3 px-4 text-right text-sm font-semibold text-gray-700">المدة</th>
+              <tr className="border-b border-[var(--border-color)] bg-[var(--bg-elevated)]">
+                <th className="py-4 px-5 text-right text-sm font-semibold text-[var(--text-primary)]">الشهادة</th>
+                <th className="py-4 px-5 text-right text-sm font-semibold text-[var(--text-primary)]">العائد</th>
+                <th className="py-4 px-5 text-right text-sm font-semibold text-[var(--text-primary)]">المدة</th>
               </tr>
             </thead>
             <tbody>
               {bankData.certificates.map((cert) => (
-                <tr key={cert.name} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="py-3 px-4 text-sm">{cert.name}</td>
-                  <td className="py-3 px-4 text-sm font-semibold text-emerald-600">{cert.rate}</td>
-                  <td className="py-3 px-4 text-sm">{cert.duration}</td>
+                <tr key={cert.name} className="border-b border-[var(--border-color)] hover:bg-[var(--bg-elevated)] transition-colors">
+                  <td className="py-4 px-5 text-sm text-[var(--text-secondary)]">{cert.name}</td>
+                  <td className="py-4 px-5 text-sm font-bold text-brand-500">{cert.rate}</td>
+                  <td className="py-4 px-5 text-sm text-[var(--text-secondary)]">{cert.duration}</td>
                 </tr>
               ))}
             </tbody>
@@ -92,16 +93,11 @@ export default async function BankPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">المميزات</h2>
+      <section className="mb-10">
+        <h2 className="text-2xl font-extrabold text-[var(--text-primary)] mb-4">المميزات</h2>
         <div className="flex flex-wrap gap-2">
           {bankData.features.map((feature) => (
-            <span
-              key={feature}
-              className="rounded-full bg-emerald-50 px-3 py-1 text-sm text-emerald-700"
-            >
-              {feature}
-            </span>
+            <Badge key={feature}>{feature}</Badge>
           ))}
         </div>
       </section>
@@ -118,6 +114,6 @@ export default async function BankPage({ params }: PageProps) {
           description: b!.description.substring(0, 100) + "...",
         }))}
       />
-    </>
+    </div>
   );
 }

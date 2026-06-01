@@ -14,27 +14,27 @@ export const metadata: Metadata = {
 
 export default function SalaryIndexPage() {
   return (
-    <>
+    <div className="container mx-auto px-4 lg:px-8 py-8">
       <Breadcrumbs items={[{ label: "الرواتب" }]} />
-      <h1 className="text-3xl md:text-4xl font-bold mb-4">دليل الرواتب في مصر 2026</h1>
-      <p className="text-gray-600 mb-8 max-w-2xl">
+      <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] mb-3">دليل الرواتب في مصر 2026</h1>
+      <p className="text-[var(--text-secondary)] mb-10 max-w-2xl leading-relaxed">
         اكتشف متوسط الرواتب لمختلف المهن في مصر. معلومات محدثة عن الرواتب والضرائب والتأمينات.
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {salaries.map((salary) => (
           <Link key={salary.slug} href={`/salary/${salary.slug}`}>
-            <Card className="h-full hover:border-emerald-300 hover:shadow-md transition-all">
+            <Card className="h-full hover:border-brand-500/30 group">
               <CardHeader>
-                <CardTitle className="text-lg">{salary.profession}</CardTitle>
-                <p className="text-sm text-gray-500">{salary.professionEn}</p>
+                <CardTitle className="text-lg group-hover:text-brand-500 transition-colors">{salary.profession}</CardTitle>
+                <p className="text-sm text-[var(--text-muted)]">{salary.professionEn}</p>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold text-emerald-600">
+                <p className="text-2xl font-extrabold text-brand-500">
                   {formatCurrency(salary.averageSalary)}
                 </p>
-                <p className="text-sm text-gray-500">متوسط الراتب الشهري</p>
-                <div className="mt-2 text-xs text-gray-400">
+                <p className="text-sm text-[var(--text-muted)]">متوسط الراتب الشهري</p>
+                <div className="mt-2 text-xs text-[var(--text-muted)]">
                   {formatCurrency(salary.minSalary)} - {formatCurrency(salary.maxSalary)}
                 </div>
               </CardContent>
@@ -42,6 +42,6 @@ export default function SalaryIndexPage() {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }

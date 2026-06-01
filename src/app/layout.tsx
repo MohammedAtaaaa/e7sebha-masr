@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PWARegister } from "@/components/layout/pwa-register";
+import { ThemeProvider } from "@/components/theme-provider";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/utils";
 import "./globals.css";
 
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#059669",
+  themeColor: "#0F7A3A",
   width: "device-width",
   initialScale: 1,
 };
@@ -61,18 +62,20 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="ar" dir="rtl">
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
-        <PWARegister />
-        <Header />
-        <main className="container mx-auto px-4 py-8">{children}</main>
-        <Footer />
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <body className="min-h-screen antialiased">
+        <ThemeProvider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c"),
+            }}
+          />
+          <PWARegister />
+          <Header />
+          <main className="animate-fade-in">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

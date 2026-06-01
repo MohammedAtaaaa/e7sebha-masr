@@ -15,17 +15,17 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 
   return (
     <>
-      <nav aria-label="breadcrumb" className="mb-6">
-        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-gray-500">
+      <nav aria-label="breadcrumb" className="mb-8">
+        <ol className="flex flex-wrap items-center gap-2 text-sm">
           {allItems.map((item, index) => (
-            <li key={index} className="flex items-center gap-1.5">
-              {index > 0 && <span className="text-gray-300">/</span>}
+            <li key={index} className="flex items-center gap-2">
+              {index > 0 && <span className="text-[var(--text-muted)]">/</span>}
               {item.href ? (
-                <Link href={item.href} className="hover:text-emerald-600 transition-colors">
+                <Link href={item.href} className="text-[var(--text-muted)] hover:text-brand-500 transition-colors">
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-gray-700 font-medium">{item.label}</span>
+                <span className="text-[var(--text-primary)] font-semibold">{item.label}</span>
               )}
             </li>
           ))}

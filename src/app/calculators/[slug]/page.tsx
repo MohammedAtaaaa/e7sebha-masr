@@ -43,7 +43,7 @@ export default async function CalculatorPage({ params }: PageProps) {
   const related = getRelatedCalculators(calc.relatedCalculators);
 
   return (
-    <>
+    <div className="container mx-auto px-4 lg:px-8 py-8">
       <Breadcrumbs
         items={[
           { label: "الحاسبات", href: "/calculators" },
@@ -52,14 +52,14 @@ export default async function CalculatorPage({ params }: PageProps) {
       />
       <FAQJsonLd faqs={calc.faqs} />
 
-      <h1 className="text-3xl md:text-4xl font-bold mb-2">{calc.seo.title}</h1>
-      <p className="text-gray-600 mb-8">{calc.seo.description}</p>
+      <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] mb-3">{calc.seo.title}</h1>
+      <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">{calc.seo.description}</p>
 
       <CalculatorForm config={calc} />
 
       <ShareButtons title={calc.title} path={`/calculators/${slug}`} />
 
-      <AdSlot slot={`calc-${slug}`} format="horizontal" className="mt-8" />
+      <AdSlot slot={`calc-${slug}`} format="horizontal" className="mt-10" />
 
       <FAQSection faqs={calc.faqs} />
 
@@ -71,6 +71,6 @@ export default async function CalculatorPage({ params }: PageProps) {
           description: r.description,
         }))}
       />
-    </>
+    </div>
   );
 }
